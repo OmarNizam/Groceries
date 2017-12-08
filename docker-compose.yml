@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  laraduck:
+    image: samdevelopment/laraduck:latest
+    working_dir: /opt/app
+    volumes:
+      - .:/opt/app
+    ports:
+      - 1443:443
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: groceries
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 123456
+    ports:
+      - 13306:3306
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+volumes:
+  mysqldata:
+    driver: local
